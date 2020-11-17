@@ -1,4 +1,4 @@
-require('dotenv').config()
+
 
 const express = require('express');
 const cors = require('cors')
@@ -6,12 +6,11 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser') 
 const app = express();
 app.use(cors())
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
+app.listen(3000, () => {
  console.log("Server started on port 3000")
 })
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/userapp', {
+var url = 'mongodb+srv://daniela:daniela123@cluster0.mgfm9.mongodb.net/userapp';
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -46,6 +45,12 @@ app.post('/user/add', (req, res) => {
       }
   })
 })
+app.get('/', (req, res) => {
+ 
+        res.send("CRUD Users Home");
+    
+   
+  })
 
 app.get('/users/', (req, res) => {
   userModel.find((err, users) => {
